@@ -1,0 +1,115 @@
+Anotaciones Video  (autorizacion y autenticacion ) https://www.youtube.com/watch?v=lV7mxivGX_I
+P1
+npm init -y  = crea el archivo package.json sirve para inicializar el proyectyo de node.js.
+
+P2
+Instala los modulos o dependencias que se uraran  
+Comando: npm i express brcryptjs cors dotenv jsonwebtoken mongoose morgan helmet
+express = es un framework de node que nos permite poder crear el servidor para manejar peticiones http, procesar datros.
+bcrryptjs = Modulo para cifrar datos, como la contraseñas, no se guardan talcual si no que se deben guardar encriptadas
+cors = modulo que permite comunicar el backend con otros servidores 
+dotenv = modulo para crear variables de ambiente 
+jsonwebtoken = concepto utilizado para autenticar usuarios en la API, (los permisos para mirar las pgns por diferentes roles)
+mongoose = modulo que permite conectar con bd
+morgan = permite ver las consultas o peticiones que llegan al servidor (por consola)
+helmet = añada caracteristicas de seguridad para que no se muestre tanta idnorpmacion como version de express se usa
+
+P3
+Crear carpeta src y dentro crear un archivo index.js
+y dentro del index.js se crea un console.log para ver si funciona
+
+P4
+En el package.json se modifica el script, se agrega el comando start y "node src/index.js" 
+verificamos que funciones y en terminal escribimos npm start, si sale el console.log se verifica qwue ya este leyendo el codigo 
+
+P5
+Se instala una biblioteca que permite usar parametros actualizado de javascrip, se usa el modulo  babeljs para poder usar las ultimas caracteristicas de nodejs  -- https://babeljs.io/
+modulos de babel 
+Comandos:  npm i @babel/core @babel/cli @babel/node @babel/preset-env
+npm i @babel/core   Es babel como tal
+@babel/cli   para usar babel desde consola o un cli "coman line interface"
+@babel/node    para usar babel atravez de node 
+@babel-present-env   para usar las ultimas caracterisiticas de babel 
+ al final se le agrega un -D para especificar qwue solo se use en desarrollo
+ 
+ Se pueden agregar  modulos utiles como:
+ nodemon  reinicia el servidor cada vez que se hacen cambios
+ 
+ P6
+ Se importa express en el index.js 
+ import express from "express"
+ 
+ Se envia la constante app para la ejecucion de express
+ const app = express()
+ 
+ P7
+ Para ejecutar primero se debe modificar el script en el package.json
+ "start": "babel-node src/index.js"   se le agrega el babel-
+ pero antes se debe crear un archivo en el proyecto que se llame .babelrc
+ en este archivo se va a especificar lo que va a traducir babel, se crea un objeto
+ {
+    "presets": [
+        "@babel/preset-env"
+    ]
+}
+ P8
+ Se inicia el servidor con 
+ npm start   
+ pero nos e queda ene ste, paarq eu se quede escuchando se agrega otro comando en el index que es app.listen(3000);
+ Con esto ya se cuenta con un servidor basico
+ 
+ P9 
+ Para poder usar nodemon primero debemos modificar el script de package.json
+ "scripts": {
+    "start": "nodemon src/index.js --exec babel-node"
+  }
+  
+  P10
+  Preparar codigo para la produccion, se crea otro comando en package.jsonpara que el codigo escrito en index.js babel convierte el codigo moderno en codigo viejo y este sea interpretado por cualquien entorno, para eso se debe crear un comando de babel que lo0 haga por nosotros  .
+   "scripts": {
+    "build": "babel src --out-dir build",  // comando babel 
+    "start": "nodemon src/index.js --exec babel-node"
+  }
+  lugo se corre en el terminal con npm run build 
+  Eso crea la carpeta build, con el index y el codigo de convertido a viejo
+  P11
+  Vamos a crear los comandos para realizar la conversion, etapa de desarrollo con dev y cuando se inicializa toda la aplicacion
+  npm run build    para convertir el codigo 
+  npm run dev   Mientras se esta desarrollando 
+  npm run start  para entrar el codigo a produccion 
+  
+  P12
+  se crean las carpetas para que vaya a ser la estructura
+  en terminal para crear varias carpetas se pone el comando en un nuevo terminal, accedes a la carpeta src y en esta ingresas mkdir controllers libs middlewares models routes
+  controllers: donde se crean las funciones que vamos a manejar cada vez que un usuaro visite un url
+  libs: es para poder colocar codigo que podemos reutilizar 
+  middlewares: para escribir unos middleware de express qu se ejecutan cada vez que un usuario visita una ruta
+  models: para especificar algunos modelos de datos que vamos a estar utilizando en mondodb
+  routes: escribir las url que va tener disponible uestro servidor, son las rutas o los endpoinds que va a tener 
+  
+  P13
+  Se crean los siguienets archivos: 
+  - app.js   - sirve para configurtar la aplicacion
+  - config.js   - sirve para crear unas cuantas propiedades de configuraciones, por ejemplo direccion base de datos, usuario base de datos, puerto en el que funciona y demas
+  - database.js    - sirve para tener la coneccion de la base de datos 
+  
+  P14
+  Se organiza el codigo en los archivos app.js y index.js
+  app.js   - solo sirve para configurar la aplicacion de express
+  import express from "express"
+import morgan from "morgan"   // es un midelware de express
+
+const app = express()
+
+export default app; //para poderlo usar en index.js
+  
+  index.js    - sirve tansolo para que arranque la aplicacion
+  import app from "./app" //se importa desde app
+
+app.listen(4000);
+
+console.log("server listen on port", 4000)
+  
+  P15
+  Se importa en app.js el modulo morgan
+  
