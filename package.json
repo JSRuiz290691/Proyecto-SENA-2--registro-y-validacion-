@@ -1,7 +1,7 @@
 {
   "name": "proyecto-sena-2-registro-y-validacion",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sistema de informacion Veterinaria",
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir build",
@@ -9,7 +9,7 @@
     "start": "node build/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bastian",
   "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.22.9",

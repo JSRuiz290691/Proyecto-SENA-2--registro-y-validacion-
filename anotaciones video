@@ -94,7 +94,7 @@ npm i @babel/core   Es babel como tal
   - database.js    - sirve para tener la coneccion de la base de datos 
   
   P14
-  Se organiza el codigo en los archivos app.js y index.js
+  Se organiza el codigo en los archivos app.js y index.js que se crean en la carpeta src
   app.js   - solo sirve para configurar la aplicacion de express
   import express from "express"
 import morgan from "morgan"   // es un midelware de express
