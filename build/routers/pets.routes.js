@@ -7,13 +7,17 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _express = require("express");
 var petsCtrol = _interopRequireWildcard(require("../controllers/pets.controllers"));
+var _middlewares = require("../middlewares");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 var router = (0, _express.Router)();
-router.post("/", petsCtrol.createPet);
+// se importan por modulos
+
+router.post("/", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmind, _middlewares.authjwt.isMedico], petsCtrol.createPet); // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
+
 router.get("/", petsCtrol.getPets);
 router.get("/:petId", petsCtrol.getPetById);
-router.put("/:petId", petsCtrol.updatePetById);
-router["delete"]("/:petId", petsCtrol.deletePetById);
+router.put("/:petId", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmin, _middlewares.authjwt.isMedico], petsCtrol.updatePetById);
+router["delete"]("/:petId", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmin, _middlewares.authjwt.isMedico], petsCtrol.deletePetById);
 var _default = router;
 exports["default"] = _default;

@@ -22,15 +22,27 @@ export const signUp = async(req, res) => {
 
     const savedUser = await newUser.save();
     console.log(savedUser)
+    console.log(savedUser.roles)
 
-    const token = jwt.sign({id: savedUser._id}, config.SECRET, {
+    const token = jwt.sign({id: savedUser._id}, config.SECRET, {  // tokens, es como crear un pase para el usuario y validad si se le da informacion o no
         expiresIn:86400 // 24 horas, el numero esta en segundos.
 
-    } ) // tokens, es como crear un pase para el usuario y validad si se le da informacion o no
+    } ) 
     
     res.status(200).json({token})
 }
 
 export const signin = async(req, res) => {
-    res.json("signin")
+    const userFound = await User.findOne({email: req.body.email}).populate("roles"); // busca el email de la req que envia el usuario
+
+    if(!userFound) return res.status(400).json({message: "User not found"}) // si no la encuentra 
+
+    const matchPassword = await User.comparePassword(req.body.password, userFound.password) // compara el password que esta guardado con el que envia el usuario para comparar si son iguales. 
+
+    if (!matchPassword) return res.status(401).json({token: null, message: "Ivalid password"}) // si no son iguales
+
+    const token = jwt.sign({id: userFound._id}, config.SECRET, {
+        expiresIn:86400 // 1 dia en segundos
+    })
+    res.json({token})
 }

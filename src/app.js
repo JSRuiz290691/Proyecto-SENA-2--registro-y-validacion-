@@ -6,6 +6,7 @@ import {createRoles} from "./libs/initialSetup" // se importa el createRoles
 
 import petsRoutes from "./routers/pets.routes"
 import authRoutes from "./routers/auth.routes"
+import usersRoutes from "./routers/user.routes";
 
 const app = express()
 createRoles(); // crea los roles al iniciar la aplicacion
@@ -27,5 +28,6 @@ app.get('/',(req, res) => {  // creamos una ruta get
 
 app.use("/api/pets" ,petsRoutes)
 app.use("/api/auth", authRoutes)
+app.use("/api/users", usersRoutes)
 
 export default app; //para poderlo usar en index.js
