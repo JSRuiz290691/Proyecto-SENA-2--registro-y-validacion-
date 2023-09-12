@@ -3,7 +3,20 @@ import bcrypt from "bcryptjs" //para cifrar la contraseña
 
 const userSchema = new Schema( 
     {
-        username:{
+        nombres:{
+            type: String,
+            unique: true,
+        },
+        apellidos: 
+        {
+            type: String,
+        },
+        fechaNacimiento: 
+        {
+            type: Date,
+        },
+        documentoIdentidad: 
+        {
             type: String,
             unique: true,
         },

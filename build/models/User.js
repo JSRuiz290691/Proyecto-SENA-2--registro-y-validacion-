@@ -14,7 +14,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //para cifrar la contraseña
 
 var userSchema = new _mongoose.Schema({
-  username: {
+  nombres: {
+    type: String,
+    unique: true
+  },
+  apellidos: {
+    type: String
+  },
+  fechaNacimiento: {
+    type: Date
+  },
+  documentoIdentidad: {
     type: String,
     unique: true
   },

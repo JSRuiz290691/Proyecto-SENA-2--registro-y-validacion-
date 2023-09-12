@@ -4,12 +4,16 @@ import config from "../config"
 import Role from "../models/Role";
 
 export const signUp = async(req, res) => {
-    const {username, email, password, roles} = req.body;
+    const {nombres, apellidos, fechaNacimiento, documentoIdentidad, email, password, roles} = req.body;
 
     const newUser = new User ({
-        username,
-        email,
-        password: await User.encryptPassword(password) //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
+        nombres, 
+        apellidos, 
+        fechaNacimiento, 
+        documentoIdentidad, 
+        email, 
+        password, 
+        roles: await User.encryptPassword(password) //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
     })
     //antes de guardar el usuario
     if(roles) { //si existe la propiedad roles

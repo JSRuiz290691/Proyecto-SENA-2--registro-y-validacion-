@@ -3,8 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports["default"] = exports.ROLES = void 0;
 var _mongoose = require("mongoose");
+var ROLES = ["user", "admin", "medico"];
+exports.ROLES = ROLES;
 var roleSchema = new _mongoose.Schema({
   name: String
 }, {

@@ -9,7 +9,6 @@ import Role from "../models/Role"
 export const verifyToken = async (req, res, next) => {  // Esta funcion es un midelware de express, que recibe un request, response, next. Si pasa esta funcion continua y si no se peude devolver un error.
     try {
         const token = req.headers["x-access-token"]; // headers es una arreglo, en tu propiedad llamada X-access-token
-        console.log(token)
         if (!token) return res.status(403).json({message: "No token proporsionado"}) // si no  existe, me envian el x-access-token, si existe continua.. 
 
         const decode = jwt.verify(token,config.SECRET) // si existe el token, se extrae lo del token y se guarda en la variable decode

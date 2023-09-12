@@ -22,24 +22,25 @@ var verifyToken = /*#__PURE__*/function () {
         case 0:
           _context.prev = 0;
           token = req.headers["x-access-token"]; // headers es una arreglo, en tu propiedad llamada X-access-token
-          console.log(token);
           if (token) {
-            _context.next = 5;
+            _context.next = 4;
             break;
           }
           return _context.abrupt("return", res.status(403).json({
             message: "No token proporsionado"
           }));
-        case 5:
+        case 4:
           // si no  existe, me envian el x-access-token, si existe continua.. 
           decode = _jsonwebtoken["default"].verify(token, _config["default"].SECRET); // si existe el token, se extrae lo del token y se guarda en la variable decode
           req.userId = decode.id; // en el objeto req estamos guardando una propiedad id, y como valor se tiene el id extraido dle token
-          _context.next = 9;
+          _context.next = 8;
           return _User["default"].findById(req.userId, {
             password: 0
           });
-        case 9:
+        case 8:
           user = _context.sent;
+          // buscamos al usuario por su id, si no existe se regresa emnsaje no user found
+          console.log(user);
           if (user) {
             _context.next = 12;
             break;
@@ -119,9 +120,43 @@ var isMedico = /*#__PURE__*/function () {
 exports.isMedico = isMedico;
 var isAdmin = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res, next) {
+    var user, roles, i;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
+          _context3.next = 2;
+          return _User["default"].findById(req.userId);
+        case 2:
+          user = _context3.sent;
+          _context3.next = 5;
+          return _Role["default"].find({
+            _id: {
+              $in: user.roles
+            }
+          });
+        case 5:
+          roles = _context3.sent;
+          i = 0;
+        case 7:
+          if (!(i < roles.length)) {
+            _context3.next = 14;
+            break;
+          }
+          if (!(roles[i].name === "admin")) {
+            _context3.next = 11;
+            break;
+          }
+          next();
+          return _context3.abrupt("return");
+        case 11:
+          i++;
+          _context3.next = 7;
+          break;
+        case 14:
+          return _context3.abrupt("return", res.status(403).json({
+            message: "Requiere Admin rol"
+          }));
+        case 15:
         case "end":
           return _context3.stop();
       }

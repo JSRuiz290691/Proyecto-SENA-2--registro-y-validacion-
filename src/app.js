@@ -7,6 +7,7 @@ import {createRoles} from "./libs/initialSetup" // se importa el createRoles
 import petsRoutes from "./routers/pets.routes"
 import authRoutes from "./routers/auth.routes"
 import usersRoutes from "./routers/user.routes";
+const cors = require('cors');
 
 const app = express()
 createRoles(); // crea los roles al iniciar la aplicacion
@@ -14,6 +15,9 @@ createRoles(); // crea los roles al iniciar la aplicacion
 
 app.use(morgan("dev")); //para uasar las rutas
 app.use(express.json()); // para que entiendas los objetos json que llegan del servidor
+app.use(cors({
+    origin: '*'
+}));
 
 app.set("pkg", pkg) //Necesitamos guardar los datos del proyecto que traemos de package.json, se guardaran en un tipo de variable de express, se usa un metodo llamado set, este metodo es para ponerle un ombre y valor a la variable.
 

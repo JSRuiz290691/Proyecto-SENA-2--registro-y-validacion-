@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var router = (0, _express.Router)();
 // se importan por modulos
 
-router.post("/", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmind, _middlewares.authjwt.isMedico], petsCtrol.createPet); // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
+router.post("/", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmin, _middlewares.authjwt.isMedico], petsCtrol.createPet); // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
 
 router.get("/", petsCtrol.getPets);
 router.get("/:petId", petsCtrol.getPetById);

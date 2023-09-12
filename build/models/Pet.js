@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _mongoose = require("mongoose");
 var petSchema = new _mongoose.Schema({
+  tipoAnimal: String,
   name: String,
+  sexo: String,
   años: Number,
-  parentesco: String,
   fechaNacimiento: Date,
+  DX: String,
   imgULR: String
 }, {
   timestamps: true,
