@@ -11510,3 +11510,12 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+
+.logged {
+  display: none;
+}
+
+#mainNav .navbar-nav li.nav-item span {
+  color: #FFF;
+  padding-top: 1rem;
+}

@@ -66,19 +66,11 @@
                     </div>
                     <div class="primary">
                         <div class="col-lg-12">
-                            <label for="" class="d-flex flex-row">Fecha de Nacimiento</label>
-                            <div class="input-group mb-3">
-                                <input type="date" class="form-control control-focus" placeholder="DD/MM/AAAA" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="primary">
-                        <div class="col-lg-12">
                             <label for="" class="d-flex flex-row"> 
                                 Documento de Identidad
                             </label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control control-focus" placeholder="Ingrese Documento" required>
+                                    <input type="text" id="id" class="form-control control-focus" placeholder="Ingrese Documento" required>
                                     <span class="input-group-text text-bg-primary" id="basic-addon1">
                                         <i class="fa-solid fa-id-card"></i>
                                     </span>
@@ -102,6 +94,19 @@
                             <div class="input-group mb-3">
                                 <input type="password" id="password" name="contra" class="form-control" placeholder="******" aria-describedby="sizing-addon1" required>
                                 <span class="input-group-text text-bg-primary" id="basic-addon1"><i class="fa-sharp fa-solid fa-key"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="primary">
+                        <div class="col-lg-12">
+                            <label for="password" class="d-flex flex-row">Rol</label>
+                            <div class="input-group mb-3">
+                                <select name="rol" id="rol">
+                                    <option value="medico">Medico</option>
+                                    <option value="user" selected>Usuario</option>
+                                    <option value="admin">Administrador</option>
+                                </select>  
+                                <span class="input-group-text text-bg-primary" id="basic-addon1"></span>
                             </div>
                         </div>
                     </div>

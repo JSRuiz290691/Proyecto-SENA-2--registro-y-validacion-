@@ -3,18 +3,18 @@ import User from "../models/User"
 
 export const createUser = async (req, res) => {
 
-        const {nombres, apellidos, fechaNacimiento, documentoIdentidad, email, password, roles} = req.body;
+        const {name, lastname, id, email, password, roles} = req.body;
 
-        const newUser = new User ({nombres, apellidos, fechaNacimiento, documentoIdentidad, email, password, roles});
+        const newUser = new User ({name, lastname, id, email, password, roles}); // se guarda el nuevo usuario en la constante newUser
 
-        const userSave = await newUser.save();
+        const userSave = await newUser.save(); // se guarda el nuevo usuario en otra constante
 
-        res.status(201).json(userSave)
+        res.status(201).json(userSave) //retorna el usuario guardado como objeto json
     
 }
 
 export const getUsers = async (req, res) => {
-    const users = await User.find();
+    const users = await User.find().populate('roles');
     res.status(200).json(users)
 }
 

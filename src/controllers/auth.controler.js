@@ -4,16 +4,15 @@ import config from "../config"
 import Role from "../models/Role";
 
 export const signUp = async(req, res) => {
-    const {nombres, apellidos, fechaNacimiento, documentoIdentidad, email, password, roles} = req.body;
+    const {name, lastname, id, email, password, roles} = req.body;
 
     const newUser = new User ({
-        nombres, 
-        apellidos, 
-        fechaNacimiento, 
-        documentoIdentidad, 
+        name, 
+        lastname,
+        id, 
         email, 
-        password, 
-        roles: await User.encryptPassword(password) //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
+        password: await User.encryptPassword(password), //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
+        roles 
     })
     //antes de guardar el usuario
     if(roles) { //si existe la propiedad roles
@@ -39,14 +38,14 @@ export const signUp = async(req, res) => {
 export const signin = async(req, res) => {
     const userFound = await User.findOne({email: req.body.email}).populate("roles"); // busca el email de la req que envia el usuario
 
-    if(!userFound) return res.status(400).json({message: "User not found"}) // si no la encuentra 
+    if(!userFound) return res.status(400).json({token: null, message: "Usuario no encontrado"}) // si no la encuentra 
 
     const matchPassword = await User.comparePassword(req.body.password, userFound.password) // compara el password que esta guardado con el que envia el usuario para comparar si son iguales. 
 
-    if (!matchPassword) return res.status(401).json({token: null, message: "Ivalid password"}) // si no son iguales
+    if (!matchPassword) return res.status(401).json({token: null, message: "Password no valido"}) // si no son iguales
 
     const token = jwt.sign({id: userFound._id}, config.SECRET, {
         expiresIn:86400 // 1 dia en segundos
     })
-    res.json({token})
+    res.json({user:userFound, token:token})
 }

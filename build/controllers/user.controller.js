@@ -12,16 +12,15 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var createUser = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, Nombres, Apellidos, fechaNacimiento, documentoIdentidad, email, password, roles, newUser, userSave;
+    var _req$body, name, lastname, id, email, password, roles, newUser, userSave;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _req$body = req.body, Nombres = _req$body.Nombres, Apellidos = _req$body.Apellidos, fechaNacimiento = _req$body.fechaNacimiento, documentoIdentidad = _req$body.documentoIdentidad, email = _req$body.email, password = _req$body.password, roles = _req$body.roles;
+          _req$body = req.body, name = _req$body.name, lastname = _req$body.lastname, id = _req$body.id, email = _req$body.email, password = _req$body.password, roles = _req$body.roles;
           newUser = new _User["default"]({
-            Nombres: Nombres,
-            Apellidos: Apellidos,
-            fechaNacimiento: fechaNacimiento,
-            documentoIdentidad: documentoIdentidad,
+            name: name,
+            lastname: lastname,
+            id: id,
             email: email,
             password: password,
             roles: roles

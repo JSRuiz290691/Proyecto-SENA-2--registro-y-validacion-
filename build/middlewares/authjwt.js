@@ -39,30 +39,28 @@ var verifyToken = /*#__PURE__*/function () {
           });
         case 8:
           user = _context.sent;
-          // buscamos al usuario por su id, si no existe se regresa emnsaje no user found
-          console.log(user);
           if (user) {
-            _context.next = 12;
+            _context.next = 11;
             break;
           }
           return _context.abrupt("return", res.status(404).json({
             menssage: "no user found"
           }));
-        case 12:
+        case 11:
           next();
-          _context.next = 18;
+          _context.next = 17;
           break;
-        case 15:
-          _context.prev = 15;
+        case 14:
+          _context.prev = 14;
           _context.t0 = _context["catch"](0);
           return _context.abrupt("return", res.status(401).json({
             message: "No Autorizado"
           }));
-        case 18:
+        case 17:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 15]]);
+    }, _callee, null, [[0, 14]]);
   }));
   return function verifyToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);

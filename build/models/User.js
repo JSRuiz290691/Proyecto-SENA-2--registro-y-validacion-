@@ -14,17 +14,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //para cifrar la contraseña
 
 var userSchema = new _mongoose.Schema({
-  nombres: {
-    type: String,
-    unique: true
-  },
-  apellidos: {
+  name: {
     type: String
   },
-  fechaNacimiento: {
-    type: Date
+  lastname: {
+    type: String
   },
-  documentoIdentidad: {
+  id: {
     type: String,
     unique: true
   },
@@ -37,7 +33,7 @@ var userSchema = new _mongoose.Schema({
     require: true
   },
   roles: [
-  // un usuario puede terner mchos roles, una relacion de  a muchos
+  // un usuario puede tener muchos roles, una relacion de a muchos
   {
     ref: "Role",
     type: _mongoose.Schema.Types.ObjectId
@@ -70,6 +66,7 @@ userSchema.statics.encryptPassword = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+// los statics hace referencia a la manera de crear metodos estaticos, son formas de poder llamar a un metodo sin necesidad de instanciar un objeto
 userSchema.statics.comparePassword = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(password, recivedPassword) {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {

@@ -10,7 +10,7 @@ var petSchema = new _mongoose.Schema({
   name: String,
   sexo: String,
   años: Number,
-  fechaNacimiento: Date,
+  fechaNacimiento: String,
   DX: String,
   imgULR: String
 }, {

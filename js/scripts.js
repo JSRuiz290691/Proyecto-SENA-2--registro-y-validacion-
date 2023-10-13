@@ -51,4 +51,32 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
+    const cookieValue = document.cookie
+                        .split("; ")
+                        .find((row) => row.startsWith("name="))
+                        ?.split("=")[1];
+    console.log(cookieValue);
+
+    const login_link = document.getElementsByClassName("login_link");
+    const logged = document.getElementsByClassName("logged");
+    const welcome_message = document.getElementById("welcome_message");
+    const logout = document.getElementById("logout_link");
+
+    if (cookieValue) {
+        welcome_message.innerHTML = "<span>Bienvenido " + cookieValue + "</span>";
+        login_link[0].style.display = "none";
+        logged[0].style.display = "list-item";
+        logged[1].style.display = "list-item";
+    }else{
+        logged[0].style.display = "none";
+        logged[1].style.display = "none";
+        login_link[0].style.display = "list-item";
+    }
+
+    logout.addEventListener("click", (e) => {
+        console.log('logout');
+        e.preventDefault();
+        document.cookie = 'name=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        location.reload();
+    });
 });

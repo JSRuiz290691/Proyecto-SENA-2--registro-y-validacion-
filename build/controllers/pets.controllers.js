@@ -35,7 +35,7 @@ var createPet = /*#__PURE__*/function () {
           petSave = _context.sent;
           //para guardarlo se ejecuta su metodo save, pero antes se le incluye el await por que se va a guardar en la DB y esto toma tiempo
 
-          res.status(201).json(petSave); //para especificar codigo de estado ".status()", que son los que le dicen al navegadoas que exactamente paso, el codigo 201 especifica que un nuevo recurso se ha creado  
+          res.status(200).json(petSave); //para especificar codigo de estado ".status()", que son los que le dicen al navegadoas que exactamente paso, el codigo 201 especifica que un nuevo recurso se ha creado  
         case 6:
         case "end":
           return _context.stop();

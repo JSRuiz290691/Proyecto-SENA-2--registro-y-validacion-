@@ -2,29 +2,29 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const btn = document.getElementById("btn_signup");
 
-    /*fetch('http://localhost:5000/api/users',
-    {
-        headers:{
-            'Access-Control-Allow-Origin': '*',
-            'content-type':'application/json: charset=UTF-8'
-        },
-        method:'GET'
-    })
-    .then(data=>{return data.json()})
-    .then(res=>{console.log(res)})
-    .catch(error=>console.log(error));*/
+    function sendSignUp() {  //se obtienen los datos ingresados y se guardan en las variables correspondientes
+        var name_element = document.getElementById('name');
+        var name = name_element.value;
+        var lastname_element = document.getElementById("lastname")
+        var lastname = lastname_element.value;
+        var id_element = document.getElementById("id")
+        var id = id_element.value;
+        var email_element = document.getElementById("email");
+        var email = email_element.value;
+        var password_element = document.getElementById("password");
+        var password = password_element.value;
+        var rol_element = document.getElementById("rol");
+        var rol = rol_element.value;
 
-    function sendSignUp() {
-        fetch("http://localhost:3000/api/auth/signup", {
+        fetch("http://localhost:10000/api/auth/signup", { //mediante la funcion fetch y el metodo POST
             method: "POST",
             body: JSON.stringify({
-                nombes: "Administrador",
-                apellidos: "oficial",
-                fechaNacimiento: "03/12/2023",
-                documentoIdentidad: "987654",
-                email: "adminVetO@gmail.com",
-                password: "password",
-                roles: ["admin"]
+                name: name,
+                lastname: lastname,
+                id: id,
+                email: email,
+                password: password,
+                roles: [rol] 
             }),
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -32,8 +32,11 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         })
         .then((response) => response.json())
-        .then((json) => console.log(json))
-        .catch(erro => console.log(error))
+        .then((json) => {
+            alert("Usuario creado exitosamente"); //envia mensaje que confirma la creacion del usuario
+            console.log(json, 'json');
+        } )
+        .catch(error => console.log(error, 'error'))
     }
 
     btn.addEventListener("click", (e) => {
