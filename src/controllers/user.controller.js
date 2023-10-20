@@ -1,4 +1,5 @@
-import User from "../models/User"
+import User from "../models/User";
+import Role from "../models/Role";
 
 
 export const createUser = async (req, res) => {
@@ -19,12 +20,30 @@ export const getUsers = async (req, res) => {
 }
 
 export const getUserById = async (req, res) => {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId).populate('roles');
     res.status(200).json(user)
 }
 
 export const updateUserById = async (req, res) => {
-    const updateUser = await User.findByIdAndUpdate(req.params.userId, req.body, {
+    const {name, lastname, id, email, password, roles} = req.body;
+
+    let userData = {
+        name, 
+        lastname,
+        id, 
+        email
+    }
+
+    if(password) {
+        userData.password = await User.encryptPassword(password);
+    }
+
+    if(roles) { //si existe la propiedad roles
+        const foundRoles = await Role.find({name: {$in: roles}}) // si el usuario ingresa el nombre de un rol, se guarda en foundRoles, devuelve un objeto u objetos
+        userData.roles = foundRoles.map(role => role._id) // se busca guardar un arreglo con los id de cada rol, y no los objetos, que recorra el foundRoles con el metodo map, y por cada objeto quiero que solo devuelvas el rol.id
+    }
+
+    const updateUser = await User.findByIdAndUpdate(req.params.userId, userData, {
         new: true
     })
     res.status(200).json(updateUser)

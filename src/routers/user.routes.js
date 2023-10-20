@@ -6,7 +6,7 @@ import {authjwt, verifySignup} from "../middlewares"
 
 router.post("/",[authjwt.verifyToken, authjwt.isAdmin, verifySignup.checkRolesExisted],userCtrl.createUser)
 
-router.get("/", userCtrl.getUsers)
+router.get("/", [authjwt.verifyToken, authjwt.isAdmin], userCtrl.getUsers)
 
 router.get("/:userId", userCtrl.getUserById)
 

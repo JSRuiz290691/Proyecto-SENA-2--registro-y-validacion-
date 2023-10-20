@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', event => {
                 id: id,
                 email: email,
                 password: password,
-                roles: [rol] 
+                roles: [rol]
             }),
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -35,6 +35,7 @@ window.addEventListener('DOMContentLoaded', event => {
         .then((json) => {
             alert("Usuario creado exitosamente"); //envia mensaje que confirma la creacion del usuario
             console.log(json, 'json');
+            location.href = '/index.html';
         } )
         .catch(error => console.log(error, 'error'))
     }

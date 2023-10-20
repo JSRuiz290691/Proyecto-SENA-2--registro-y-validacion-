@@ -51,22 +51,22 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
-    const cookieValue = document.cookie
-                        .split("; ")
-                        .find((row) => row.startsWith("name="))
-                        ?.split("=")[1];
+    const cookieValue = document.cookie  // se coge el valor de la cookie, el name cuando se haya logueado
+                        .split("; ") // arma un array separando la cadena por ; espacio
+                        .find((row) => row.startsWith("name=")) // busca en la fila lo que empieza con "name="
+                        ?.split("=")[1]; // si lo encuentra toma el valor asignado de name
     console.log(cookieValue);
 
-    const login_link = document.getElementsByClassName("login_link");
-    const logged = document.getElementsByClassName("logged");
+    const login_link = document.getElementsByClassName("login_link"); // guarda en una variable la referencia al elemento de inicio seccion
+    const logged = document.getElementsByClassName("logged"); // se guarda el elemento logged definido en el nav de html
     const welcome_message = document.getElementById("welcome_message");
     const logout = document.getElementById("logout_link");
 
-    if (cookieValue) {
+    if (cookieValue) { // si se guardo 
         welcome_message.innerHTML = "<span>Bienvenido " + cookieValue + "</span>";
-        login_link[0].style.display = "none";
-        logged[0].style.display = "list-item";
-        logged[1].style.display = "list-item";
+        login_link[0].style.display = "none"; //
+        logged[0].style.display = "list-item"; // se muestran los elementos en el nav
+        logged[1].style.display = "list-item"; //
     }else{
         logged[0].style.display = "none";
         logged[1].style.display = "none";
@@ -77,6 +77,6 @@ window.addEventListener('DOMContentLoaded', event => {
         console.log('logout');
         e.preventDefault();
         document.cookie = 'name=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        location.reload();
+        document.location.href='/';
     });
 });

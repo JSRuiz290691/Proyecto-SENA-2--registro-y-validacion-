@@ -2,9 +2,9 @@ import Pet  from "../models/Pet" // se importa desde models
 
 export const createPet = async (req, res) => { // ene sta funcion principal se incluye async por ser requisito del await
     
-    const {tipoAnimal, name, sexo, años, fechaNacimiento, DX, imgULR} = req.body // a esto se le llama reestructuri, se extraen todos los paramertros del objeto Pet.
+    const {animalType, name, gender, years, birthDate, dx, photo} = req.body // a esto se le llama reestructuri, se extraen todos los paramertros del objeto Pet.
 
-    const newPet = new Pet ({tipoAnimal, name, sexo, años, fechaNacimiento, DX, imgULR});  // se crea un nuevo Pet objeto
+    const newPet = new Pet({animalType, name, gender, years, birthDate, dx, photo});  // se crea un nuevo Pet objeto
     
     const petSave = await newPet.save() //para guardarlo se ejecuta su metodo save, pero antes se le incluye el await por que se va a guardar en la DB y esto toma tiempo
     
