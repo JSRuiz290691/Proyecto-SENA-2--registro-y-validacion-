@@ -5,7 +5,7 @@ const token = document.cookie
 
 function deleteUser(e) {
     let user_id = e.getAttribute('ref');
-    fetch("http://localhost:10000/api/users/" + user_id, {
+    fetch("http://localhost:3000/api/users/" + user_id, {
         method: "DELETE",
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', event => {
         .find((row) => row.startsWith("token="))
         ?.split("=")[1];
 
-    let url = "http://localhost:10000/api/users"; // se hace referencia al origen de los datos 
+    let url = "http://localhost:3000/api/users"; // se hace referencia al origen de los datos 
     fetch(url, {// se hace solicitud a la url
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', event => {
                 <td>${data[i].lastname}</td>
                 <td>${data[i].id}</td>
                 <td>${data[i].email}</td>
-                <td>${data[i].roles[0].name}</td>
+                <td>${data[i].role.name}</td>
                 <td>
                     <button class="btn btn-primary"ref="${data[i]._id}" onclick="goToEdit(this)" type="button">Editar</button>
                     <button class="btn btn-danger" ref="${data[i]._id}" onclick="deleteUser(this)" type="button">Eliminar</button>

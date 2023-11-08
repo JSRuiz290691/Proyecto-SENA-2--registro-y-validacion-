@@ -7,7 +7,7 @@ var dx_element = document.getElementById("dx");
 var photo_element = document.getElementById("photo");
 
 function getPet(pet_id) { // obtiene los datos segun el id enviado para ser mostrados en el formulario, la info de cada mascota
-    fetch("http://localhost:10000/api/pets/" + pet_id, {
+    fetch("http://localhost:3000/api/pets/" + pet_id, {
         method: "GET",
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -39,7 +39,7 @@ function editPet(pet_id, token) {
         photo: photo_element.value
     }
     
-    fetch("http://localhost:10000/api/pets/" + pet_id, {
+    fetch("http://localhost:3000/api/pets/" + pet_id, {
         method: "PUT",
         body: JSON.stringify(body),
         headers: {

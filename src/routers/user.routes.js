@@ -4,7 +4,7 @@ const router = Router()
 import * as userCtrl from "../controllers/user.controller"
 import {authjwt, verifySignup} from "../middlewares"
 
-router.post("/",[authjwt.verifyToken, authjwt.isAdmin, verifySignup.checkRolesExisted],userCtrl.createUser)
+router.post("/",[authjwt.verifyToken, authjwt.isAdmin, verifySignup.checkRolesExisted, verifySignup.checkDuplicateId],userCtrl.createUser)
 
 router.get("/", [authjwt.verifyToken, authjwt.isAdmin], userCtrl.getUsers)
 

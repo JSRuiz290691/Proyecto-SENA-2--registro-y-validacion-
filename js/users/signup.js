@@ -1,3 +1,8 @@
+const token = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("token="))
+            ?.split("=")[1];
+
 window.addEventListener('DOMContentLoaded', event => {
 
     const btn = document.getElementById("btn_signup");
@@ -13,10 +18,10 @@ window.addEventListener('DOMContentLoaded', event => {
         var email = email_element.value;
         var password_element = document.getElementById("password");
         var password = password_element.value;
-        var rol_element = document.getElementById("rol");
-        var rol = rol_element.value;
+        var role_element = document.getElementById("role");
+        var role = role_element.value;
 
-        fetch("http://localhost:10000/api/auth/signup", { //mediante la funcion fetch y el metodo POST
+        fetch("http://localhost:3000/api/auth/signup", { //mediante la funcion fetch y el metodo POST
             method: "POST",
             body: JSON.stringify({
                 name: name,
@@ -24,16 +29,18 @@ window.addEventListener('DOMContentLoaded', event => {
                 id: id,
                 email: email,
                 password: password,
-                roles: [rol]
+                role: role
             }),
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "x-access-token": token
             }
         })
         .then((response) => response.json())
         .then((json) => {
-            alert("Usuario creado exitosamente"); //envia mensaje que confirma la creacion del usuario
+            
+            alert(json.message ); //envia mensaje que confirma la creacion del usuario
             console.log(json, 'json');
             location.href = '/index.html';
         } )

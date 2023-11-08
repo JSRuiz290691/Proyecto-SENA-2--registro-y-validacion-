@@ -65,11 +65,21 @@ window.addEventListener('DOMContentLoaded', event => {
     if (cookieValue) { // si se guardo 
         welcome_message.innerHTML = "<span>Bienvenido " + cookieValue + "</span>";
         login_link[0].style.display = "none"; //
-        logged[0].style.display = "list-item"; // se muestran los elementos en el nav
+        for (let i = 0; i < logged.length; i++) { //recorre el array logged
+            const element = logged[i]; // le asigna un valor a cada elemento de logged
+            element.style.display = "list-item"; // cambia el display para poder mostrarlo 
+        }
+        /* logged[0].style.display = "list-item"; // se muestran los elementos en el nav
         logged[1].style.display = "list-item"; //
+        console.log(logged); */
     }else{
-        logged[0].style.display = "none";
-        logged[1].style.display = "none";
+        for (let i = 0; i < logged.length; i++) {
+            const element = logged[i];
+            element.style.display = "none"
+            
+        }
+        // logged[0].style.display = "none";
+        // logged[1].style.display = "none";
         login_link[0].style.display = "list-item";
     }
 
@@ -77,6 +87,7 @@ window.addEventListener('DOMContentLoaded', event => {
         console.log('logout');
         e.preventDefault();
         document.cookie = 'name=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         document.location.href='/';
     });
 });

@@ -3,10 +3,10 @@ var lastname_element = document.getElementById('lastname');
 var id_element = document.getElementById('id');
 var email_element = document.getElementById('email');
 var password_element = document.getElementById('password');
-var rol_element = document.getElementById('rol');
+var role_element = document.getElementById('role');
 
 function getUser(user_id) {
-    fetch("http://localhost:10000/api/users/" + user_id, {
+    fetch("http://localhost:3000/api/users/" + user_id, {
         method: "GET",
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -20,7 +20,7 @@ function getUser(user_id) {
         lastname_element.value = json.lastname;
         id_element.value = json.id;
         email_element.value = json.email;
-        rol_element.value = json.roles[0].name;
+        role_element.value = json.role.name;
     })
     .catch(error => console.log(error, 'error'))
 }
@@ -31,7 +31,7 @@ function editUser(user_id, token) {
         lastname: lastname_element.value,
         id: id_element.value,
         email: email_element.value,
-        roles: [rol_element.value]
+        role: [role_element.value]
     }
     if (password_element.value) {
         body.password = password_element.value;

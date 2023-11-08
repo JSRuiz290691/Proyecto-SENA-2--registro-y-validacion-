@@ -7,7 +7,7 @@ import {authjwt} from "../middlewares" // se importan por modulos
 
 router.post("/", [authjwt.verifyToken, authjwt.isAdminOrMedic] , petsCtrol.createPet) // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
 
-router.get("/", petsCtrol.getPets)
+router.get("/", [authjwt.verifyToken] , petsCtrol.getPets)
 
 router.get("/:petId", petsCtrol.getPetById)
 

@@ -21,12 +21,10 @@ const userSchema = new Schema(
             type: String,
             require: true,
         },
-        roles: [ // un usuario puede tener muchos roles, una relacion de a muchos
-            {
-                ref: "Role",
-                type: Schema.Types.ObjectId,
-            },
-        ],
+        role: {
+            ref: "Role",
+            type: Schema.Types.ObjectId,
+        },
     },
     {
         timestamps: true,

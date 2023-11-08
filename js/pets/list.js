@@ -5,7 +5,7 @@ const token = document.cookie
 
 function deletePet(e) {
     let pet_id = e.getAttribute('ref');
-    fetch("http://localhost:10000/api/pets/" + pet_id, {
+    fetch("http://localhost:3000/api/pets/" + pet_id, {
         method: "DELETE",
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -29,7 +29,7 @@ function goToEdit(e) {
 
 window.addEventListener('DOMContentLoaded', event => {
 
-    let url = "http://localhost:10000/api/pets"; // se hace referencia al origen de los datos 
+    let url = "http://localhost:3000/api/pets"; // se hace referencia al origen de los datos 
     fetch(url, { // se hace solicitud a la url
         headers: { // cuando no se asigna metodo, por descarte toma GET
             "Access-Control-Allow-Origin": "*",

@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
             .find((row) => row.startsWith("token="))
             ?.split("=")[1];
 
-        fetch("http://localhost:10000/api/pets", { //mediante la funcion fetch y el metodo POST
+        fetch("http://localhost:3000/api/pets", { //mediante la funcion fetch y el metodo POST
             method: "POST",
             body: JSON.stringify({
                 animalType: animalType,
@@ -42,9 +42,9 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
         })
         .then((response) => response.json())
         .then((json) => {
-            //alert("Mascota creada exitosamente"); //envia mensaje que confirma la creacion del usuario
+            alert("Mascota creada exitosamente"); //envia mensaje que confirma la creacion del usuario
             console.log(json, 'json');
-            //location.href = '/index.html';
+            location.href = '/index.html';
         })
         .catch(error => console.log(error, 'error'))
     }
