@@ -8,10 +8,12 @@ import petsRoutes from "./routers/pets.routes"
 import authRoutes from "./routers/auth.routes"
 import usersRoutes from "./routers/user.routes";
 import appointmentRoutes from "./routers/appointment.routes"
+import clinicHistoryRoutes from "./routers/clinicHistory.routes"
+
 const cors = require('cors');
 
 const app = express()
-createRoles(); // crea los roles al iniciar la aplicacion
+// createRoles(); // crea los roles al iniciar la aplicacion
 
 
 app.use(morgan("dev")); //para uasar las rutas
@@ -35,5 +37,6 @@ app.use("/api/pets" ,petsRoutes)
 app.use("/api/auth", authRoutes)
 app.use("/api/users", usersRoutes)
 app.use("/api/appointment", appointmentRoutes)
+app.use("/api/clinicHistory", clinicHistoryRoutes)
 
 export default app; //para poderlo usar en index.js

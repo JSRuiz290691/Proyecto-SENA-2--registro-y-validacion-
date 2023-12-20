@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _mongoose = require("mongoose");
 var petSchema = new _mongoose.Schema({
-  tipoAnimal: String,
+  animalType: String,
   name: String,
-  sexo: String,
-  años: Number,
-  fechaNacimiento: String,
-  DX: String,
-  imgULR: String
+  gender: String,
+  years: Number,
+  birthDate: String,
+  dx: String,
+  photo: String
 }, {
   timestamps: true,
   // cada que se guarde un nuevo dato va con su fecha de creacion o ultima fecha de actualizacion

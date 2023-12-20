@@ -32,12 +32,10 @@ var userSchema = new _mongoose.Schema({
     type: String,
     require: true
   },
-  roles: [
-  // un usuario puede tener muchos roles, una relacion de a muchos
-  {
+  role: {
     ref: "Role",
     type: _mongoose.Schema.Types.ObjectId
-  }]
+  }
 }, {
   timestamps: true,
   versionKey: false

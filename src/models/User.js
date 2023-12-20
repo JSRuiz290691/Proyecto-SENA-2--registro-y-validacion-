@@ -13,6 +13,10 @@ const userSchema = new Schema(
             type: String,
             unique: true
         },
+        contactNumber: {
+            type: Number,
+            unique: true
+        },
         email: {
             type: String,
             unique: true,
@@ -25,6 +29,10 @@ const userSchema = new Schema(
             ref: "Role",
             type: Schema.Types.ObjectId,
         },
+        pets: [{ //se usa corchetes para indicar que es un array de objetos
+            ref: "Pet",
+            type: Schema.Types.ObjectId,
+        }],
     },
     {
         timestamps: true,

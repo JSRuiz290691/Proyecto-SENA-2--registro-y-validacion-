@@ -14,20 +14,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var createPet = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, tipoAnimal, name, sexo, años, fechaNacimiento, DX, imgULR, newPet, petSave;
+    var _req$body, animalType, name, gender, years, birthDate, dx, photo, newPet, petSave;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           // ene sta funcion principal se incluye async por ser requisito del await
-          _req$body = req.body, tipoAnimal = _req$body.tipoAnimal, name = _req$body.name, sexo = _req$body.sexo, años = _req$body.años, fechaNacimiento = _req$body.fechaNacimiento, DX = _req$body.DX, imgULR = _req$body.imgULR; // a esto se le llama reestructuri, se extraen todos los paramertros del objeto Pet.
+          _req$body = req.body, animalType = _req$body.animalType, name = _req$body.name, gender = _req$body.gender, years = _req$body.years, birthDate = _req$body.birthDate, dx = _req$body.dx, photo = _req$body.photo; // a esto se le llama reestructuri, se extraen todos los paramertros del objeto Pet.
           newPet = new _Pet["default"]({
-            tipoAnimal: tipoAnimal,
+            animalType: animalType,
             name: name,
-            sexo: sexo,
-            años: años,
-            fechaNacimiento: fechaNacimiento,
-            DX: DX,
-            imgULR: imgULR
+            gender: gender,
+            years: years,
+            birthDate: birthDate,
+            dx: dx,
+            photo: photo
           }); // se crea un nuevo Pet objeto
           _context.next = 4;
           return newPet.save();

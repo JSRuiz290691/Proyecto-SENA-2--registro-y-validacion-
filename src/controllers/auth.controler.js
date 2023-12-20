@@ -4,12 +4,12 @@ import config from "../config"
 import Role from "../models/Role";
 
 export const signUp = async(req, res) => {
-    const {name, lastname, id, email, password, role} = req.body;
-
+    const {name, lastname, id, contactNumber, email, password, role} = req.body;
     const newUser = new User ({
         name, 
         lastname,
-        id, 
+        id,
+        contactNumber,
         email, 
         password: await User.encryptPassword(password), //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
         role 
@@ -29,8 +29,7 @@ export const signUp = async(req, res) => {
 
     const token = jwt.sign({id: savedUser._id}, config.SECRET, {  // tokens, es como crear un pase para el usuario y validad si se le da informacion o no
         expiresIn:86400 // 24 horas, el numero esta en segundos.
-
-    } ) 
+} ) 
     
     res.status(200).json({message: "Usuario creado exitosamente"})
 }

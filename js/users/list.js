@@ -42,25 +42,32 @@ window.addEventListener('DOMContentLoaded', event => {
         }
     })
         .then(response => {
-            console.log(response.status);
+            // console.log(response.status);
             if (response.status == 403) {
                 alert('Usuario no autorizado');
             } else {
                 return response.json();
             }
         }) // recibe la respuesta y la pasa a formato json
-        .then(data =>mostrarData(data)) // se lee el objeto data y se pasa por consola
+        .then(data =>mostrarData(data)) // data recibe la promesa del fetchse lee el objeto data y se pasa por consola
         .catch(error => console.log(error)) // si existe error que lo atrape con la palabra catch
 
     const mostrarData = (data) => {
 
-        let body = "";
-        for (var i = 0; i < data.length; i++) {
+        let body = ""; // se asigna una variable vacia donde se guardaran los valores 
+        for (var i = 0; i < data.length; i++) { // este ciclo for recorre los usuarios guardados en data del fetch
+            let pets = '' 
+            for (var j = 0; j < data[i].pets.length; j++) { // recorre las mascotas de cada usuario de data[i]
+                pets += `${data[i].pets[j].name}<br />` // += adiciona datos en la variable pets de cada usuario
+            }
+            
             body+=`<tr><td>${data[i].name}</td>
                 <td>${data[i].lastname}</td>
                 <td>${data[i].id}</td>
+                <td>${data[i].contactNumber}</td>
                 <td>${data[i].email}</td>
                 <td>${data[i].role.name}</td>
+                <td>${pets}</td>
                 <td>
                     <button class="btn btn-primary"ref="${data[i]._id}" onclick="goToEdit(this)" type="button">Editar</button>
                     <button class="btn btn-danger" ref="${data[i]._id}" onclick="deleteUser(this)" type="button">Eliminar</button>

@@ -1,4 +1,4 @@
-import Role from "../models/Role"
+/* import Role from "../models/Role"
 
 export const createRoles = async () => {
 
@@ -19,4 +19,4 @@ export const createRoles = async () => {
         console.log(error)
     }
 
-}
+} */

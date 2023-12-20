@@ -13,11 +13,12 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var router = (0, _express.Router)();
 // se importan por modulos
 
-router.post("/", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmin, _middlewares.authjwt.isMedico], petsCtrol.createPet); // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
+router.post("/", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdminOrMedic], petsCtrol.createPet); // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
 
-router.get("/", petsCtrol.getPets);
+router.get("/", [_middlewares.authjwt.verifyToken], petsCtrol.getPets);
 router.get("/:petId", petsCtrol.getPetById);
-router.put("/:petId", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmin, _middlewares.authjwt.isMedico], petsCtrol.updatePetById);
-router["delete"]("/:petId", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdmin, _middlewares.authjwt.isMedico], petsCtrol.deletePetById);
+router.put("/:petId", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdminOrMedic], petsCtrol.updatePetById);
+router["delete"]("/:petId", [_middlewares.authjwt.verifyToken, _middlewares.authjwt.isAdminOrMedic], petsCtrol.deletePetById);
+// router.delete("/:petId", [authjwt.verifyToken, authjwt.isAdmin, authjwt.isMedico], petsCtrol.deletePetById)
 var _default = router;
 exports["default"] = _default;

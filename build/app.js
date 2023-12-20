@@ -11,6 +11,7 @@ var _initialSetup = require("./libs/initialSetup");
 var _pets = _interopRequireDefault(require("./routers/pets.routes"));
 var _auth = _interopRequireDefault(require("./routers/auth.routes"));
 var _user = _interopRequireDefault(require("./routers/user.routes"));
+var _appointment = _interopRequireDefault(require("./routers/appointment.routes"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 // es un middleware de express, permitre hacer lo de la linea 7
 //subimos un nivel e importamos el package.json
@@ -41,5 +42,6 @@ app.get('/', function (req, res) {
 app.use("/api/pets", _pets["default"]);
 app.use("/api/auth", _auth["default"]);
 app.use("/api/users", _user["default"]);
+app.use("/api/appointment", _appointment["default"]);
 var _default = app; //para poderlo usar en index.js
 exports["default"] = _default;

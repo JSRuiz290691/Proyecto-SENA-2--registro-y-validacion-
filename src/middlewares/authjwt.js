@@ -35,7 +35,6 @@ export const isMedico = async (req, res, next) => { //para comprobar si es medic
     
     return res.status(403).json({message: "Requiere medico rol"})
 };
-
 export const isAdmin = async (req, res, next) => {
     const user = await User.findById(req.userId);
     console.log(user); //se usa la misma variable que se uso arriba (userID) // obtenemos el usuario y lo guardamos en const user
@@ -48,7 +47,6 @@ export const isAdmin = async (req, res, next) => {
     
     return res.status(403).json({message: "Requiere Admin rol"})
 }
-
 export const isAdminOrMedic = async (req, res, next) => {
     const user = await User.findById(req.userId); //se usa la misma variable que se uso arriba (userID) // obtenemos el usuario y lo guardamos en const user
     const role = await Role.findById(user.role);
@@ -57,6 +55,5 @@ export const isAdminOrMedic = async (req, res, next) => {
         next();
         return;
     }
-    return res.status(403).json({role});
-    //return res.status(403).json({message: "Requiere rol Administrador o Medico rol"});
+    return res.status(403).json({role}); //return res.status(403).json({message: "Requiere rol Administrador o Medico rol"});
 }

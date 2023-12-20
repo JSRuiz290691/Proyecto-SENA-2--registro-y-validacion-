@@ -25,6 +25,10 @@ function goToEdit(e) {
     let pet_id = e.getAttribute('ref');
     location.href ='edit.html?u=' + pet_id;
 }
+function goToClinicHistory(e) {
+    let pet_id = e.getAttribute('ref');
+    location.href ='../clinicHistory/edit.html?p=' + pet_id;
+}
 
 
 window.addEventListener('DOMContentLoaded', event => {
@@ -37,16 +41,16 @@ window.addEventListener('DOMContentLoaded', event => {
             "x-access-token": token
             }
     })
-        .then(response => {
-            console.log(response.status);
-            if (response.status == 403) {
-                alert('Usuario no autorizado');
-            } else {
-                return response.json();
-            }
-        }) // recibe la respuesta y la pasa a formato json
-        .then(data =>mostrarData(data)) // se lee el objeto data y se pasa por consola
-        .catch(error => console.log(error)) // si existe error que lo atrape con la palabra catch
+    .then(response => {
+        console.log(response.status);
+        if (response.status == 403) {
+            alert('Usuario no autorizado');
+        } else {
+            return response.json();
+        }
+    }) // recibe la respuesta y la pasa a formato json
+    .then(data =>mostrarData(data)) // se lee el objeto data y se pasa por consola
+    .catch(error => console.log(error)) // si existe error que lo atrape con la palabra catch
 
     const mostrarData = (data) => {
 
@@ -57,14 +61,15 @@ window.addEventListener('DOMContentLoaded', event => {
             body+=`<tr>
                 <td>${data[i].animalType}</td> 
                 <td>${data[i].name}</td>
+                <td>${data[i].characteristicsPet}</td>
                 <td>${data[i].gender}</td>
                 <td>${data[i].years}</td>
                 <td>${dateFormate}</td>
-                <td>${data[i].dx}</td>
                 <td><img src='${data[i].photo}'width="200px"/></td>
                 <td>
                     <button class="btn btn-primary"ref="${data[i]._id}" onclick="goToEdit(this)" type="button">Editar</button>
                     <button class="btn btn-danger" ref="${data[i]._id}" onclick="deletePet(this)" type="button">Eliminar</button>
+                    <button class="btn btn-info" ref="${data[i]._id}" onclick="goToClinicHistory(this)" type="button">Historia Clinica</button>
                 </td>
                 <tr>`; // se crea la estructura html de la tabla, y se le asigan una variabel para despues mostrarla. 
         }

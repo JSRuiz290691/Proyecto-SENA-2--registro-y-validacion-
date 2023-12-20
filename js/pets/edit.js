@@ -1,9 +1,15 @@
+const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+
 var animalType_element = document.getElementById('animalType');
 var name_element = document.getElementById("name")
+var characteristicsPet_element = document.getElementById("characteristicsPet")
 var gender_element = document.getElementById("gender")
 var years_element = document.getElementById("years");
 var birthDate_element = document.getElementById("birthDate");
-var dx_element = document.getElementById("dx");
+var petOwner_element = document.getElementById("petOwner");
 var photo_element = document.getElementById("photo");
 
 function getPet(pet_id) { // obtiene los datos segun el id enviado para ser mostrados en el formulario, la info de cada mascota
@@ -19,10 +25,10 @@ function getPet(pet_id) { // obtiene los datos segun el id enviado para ser most
         console.log(json, 'json');
         animalType_element.value = json.animalType;
         name_element.value = json.name;
+        characteristicsPet_element.value = json.characteristicsPet;
         gender_element.value = json.gender;
         years_element.value = json.years;
         birthDate_element.value = json.birthDate;
-        dx_element.value = json.dx;
         photo_element.value = json.photo;
     })
     .catch(error => console.log(error, 'error'))
@@ -32,10 +38,11 @@ function editPet(pet_id, token) {
     let body = {
         animalType: animalType_element.value,
         name: name_element.value,
+        characteristicsPet: characteristicsPet_element.value,
         gender: gender_element.value,
         years: years_element.value,
         birthDate: birthDate_element.value,
-        dx: dx_element.value,
+        characteristicsPet: characteristicsPet_element.value,
         photo: photo_element.value
     }
     

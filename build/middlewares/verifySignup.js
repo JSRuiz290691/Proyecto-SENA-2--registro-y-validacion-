@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.checkRolesExisted = exports.checkDuplicateUsernameOrEmail = void 0;
+exports.checkRolesExisted = exports.checkDuplicateUsernameOrEmail = exports.checkDuplicateId = void 0;
 var _Role = require("../models/Role");
 var _User = _interopRequireDefault(require("../models/User"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -13,7 +13,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; } // se usa para verificar si envia un correo nuevo o si ya existe, o comprobar si el rol enviado ya fue creado, es como una validacion.
 var checkDuplicateUsernameOrEmail = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res, next) {
-    var user, email;
+    var email;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -22,31 +22,17 @@ var checkDuplicateUsernameOrEmail = /*#__PURE__*/function () {
             email: req.body.email
           });
         case 2:
-          user = _context.sent;
-          if (!user) {
-            _context.next = 5;
-            break;
-          }
-          return _context.abrupt("return", res.status(400).json({
-            message: "El usuario ya existe"
-          }));
-        case 5:
-          _context.next = 7;
-          return _User["default"].findOne({
-            email: req.body.email
-          });
-        case 7:
           email = _context.sent;
           if (!email) {
-            _context.next = 10;
+            _context.next = 5;
             break;
           }
           return _context.abrupt("return", res.status(400).json({
             message: "El email ya existe"
           }));
-        case 10:
+        case 5:
           next();
-        case 11:
+        case 6:
         case "end":
           return _context.stop();
       }
@@ -57,43 +43,75 @@ var checkDuplicateUsernameOrEmail = /*#__PURE__*/function () {
   };
 }();
 exports.checkDuplicateUsernameOrEmail = checkDuplicateUsernameOrEmail;
-var checkRolesExisted = /*#__PURE__*/function () {
+var checkDuplicateId = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res, next) {
-    var i;
+    var id;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          if (!req.body.roles) {
-            _context2.next = 8;
-            break;
-          }
-          i = 0;
+          _context2.next = 2;
+          return _User["default"].findOne({
+            id: req.body.id
+          });
         case 2:
-          if (!(i < req.body.roles.length)) {
-            _context2.next = 8;
-            break;
-          }
-          if (_Role.ROLES.includes(req.body.roles[i])) {
+          id = _context2.sent;
+          if (!id) {
             _context2.next = 5;
             break;
           }
           return _context2.abrupt("return", res.status(400).json({
-            message: "Role ".concat(req.body.roles[i], " does nor exists")
+            message: "El numero de identificacion ya existe"
           }));
         case 5:
-          i++;
-          _context2.next = 2;
-          break;
-        case 8:
           next();
-        case 9:
+        case 6:
         case "end":
           return _context2.stop();
       }
     }, _callee2);
   }));
-  return function checkRolesExisted(_x4, _x5, _x6) {
+  return function checkDuplicateId(_x4, _x5, _x6) {
     return _ref2.apply(this, arguments);
+  };
+}();
+exports.checkDuplicateId = checkDuplicateId;
+var checkRolesExisted = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res, next) {
+    var i;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          if (!req.body.rol) {
+            _context3.next = 8;
+            break;
+          }
+          i = 0;
+        case 2:
+          if (!(i < req.body.rol.length)) {
+            _context3.next = 8;
+            break;
+          }
+          if (_Role.ROLES.includes(req.body.rol[i])) {
+            _context3.next = 5;
+            break;
+          }
+          return _context3.abrupt("return", res.status(400).json({
+            message: "Role ".concat(req.body.rol[i], " does nor exists")
+          }));
+        case 5:
+          i++;
+          _context3.next = 2;
+          break;
+        case 8:
+          next();
+        case 9:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function checkRolesExisted(_x7, _x8, _x9) {
+    return _ref3.apply(this, arguments);
   };
 }();
 exports.checkRolesExisted = checkRolesExisted;

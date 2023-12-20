@@ -15,67 +15,64 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var signUp = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, name, lastname, id, email, password, roles, newUser, foundRoles, role, savedUser, token;
+    var _req$body, name, lastname, id, email, password, role, newUser, foundRoles, _role, savedUser, token;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _req$body = req.body, name = _req$body.name, lastname = _req$body.lastname, id = _req$body.id, email = _req$body.email, password = _req$body.password, roles = _req$body.roles;
-          console.log(req.body);
+          _req$body = req.body, name = _req$body.name, lastname = _req$body.lastname, id = _req$body.id, email = _req$body.email, password = _req$body.password, role = _req$body.role;
           _context.t0 = _User["default"];
           _context.t1 = name;
           _context.t2 = lastname;
           _context.t3 = id;
           _context.t4 = email;
-          _context.next = 9;
+          _context.next = 8;
           return _User["default"].encryptPassword(password);
-        case 9:
+        case 8:
           _context.t5 = _context.sent;
-          _context.t6 = roles;
+          _context.t6 = role;
           _context.t7 = {
             name: _context.t1,
             lastname: _context.t2,
             id: _context.t3,
             email: _context.t4,
             password: _context.t5,
-            roles: _context.t6
+            role: _context.t6
           };
           newUser = new _context.t0(_context.t7);
-          console.log(password);
-          //antes de guardar el usuario
-          if (!roles) {
-            _context.next = 21;
+          if (!role) {
+            _context.next = 19;
             break;
           }
-          _context.next = 17;
+          _context.next = 15;
           return _Role["default"].find({
             name: {
-              $in: roles
+              $in: role
             }
           });
-        case 17:
+        case 15:
           foundRoles = _context.sent;
           // si el usuario ingresa el nombre de un rol, se guarda en foundRoles, devuelve un objeto u objetos
-          newUser.roles = foundRoles.map(function (role) {
+          newUser.role = foundRoles.map(function (role) {
             return role._id;
           }); // se busca guardar un arreglo con los id de cada rol, y no los objetos, que recorra el foundRoles con el metodo map, y por cada objeto quiero que solo devuelvas el rol.id
-          _context.next = 25;
-          break;
-        case 21:
           _context.next = 23;
+          break;
+        case 19:
+          _context.next = 21;
           return _Role["default"].findOne({
             name: "user"
           });
-        case 23:
-          role = _context.sent;
+        case 21:
+          _role = _context.sent;
           // si no encuentra ningun rol, se buscara el rol llamado user
-          newUser.roles = [role._id]; // se guarda en el nuevousuario el id del rol user como arreglo por que roles es un arreglo
-        case 25:
-          _context.next = 27;
+          newUser.role = [_role._id]; // se guarda en el nuevousuario el id del rol user como arreglo por que roles es un arreglo
+        case 23:
+          _context.next = 25;
           return newUser.save();
-        case 27:
+        case 25:
           savedUser = _context.sent;
           console.log(savedUser);
-          console.log(savedUser.roles);
+          console.log(savedUser.role);
           token = _jsonwebtoken["default"].sign({
             id: savedUser._id
           }, _config["default"].SECRET, {
@@ -84,9 +81,9 @@ var signUp = /*#__PURE__*/function () {
           });
 
           res.status(200).json({
-            token: token
+            message: "Usuario creado exitosamente"
           });
-        case 32:
+        case 30:
         case "end":
           return _context.stop();
       }
@@ -106,7 +103,7 @@ var signin = /*#__PURE__*/function () {
           _context2.next = 2;
           return _User["default"].findOne({
             email: req.body.email
-          }).populate("roles");
+          }).populate("role");
         case 2:
           userFound = _context2.sent;
           if (userFound) {
@@ -114,7 +111,8 @@ var signin = /*#__PURE__*/function () {
             break;
           }
           return _context2.abrupt("return", res.status(400).json({
-            message: "User not found"
+            token: null,
+            message: "Usuario no encontrado"
           }));
         case 5:
           _context2.next = 7;
@@ -127,7 +125,7 @@ var signin = /*#__PURE__*/function () {
           }
           return _context2.abrupt("return", res.status(401).json({
             token: null,
-            message: "Ivalid password"
+            message: "Password no valido"
           }));
         case 10:
           // si no son iguales
@@ -138,6 +136,7 @@ var signin = /*#__PURE__*/function () {
           });
 
           res.json({
+            user: userFound,
             token: token
           });
         case 12:

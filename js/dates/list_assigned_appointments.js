@@ -4,7 +4,7 @@ const token = document.cookie
         ?.split("=")[1];
 
 function deleteAppointment(e) {
-    let user_id = e.getAttribute('ref');
+    let appointment_id = e.getAttribute('ref');
     fetch("http://localhost:3000/api/appointment/" + appointment_id, {
         method: "DELETE",
         headers: {
@@ -56,12 +56,16 @@ window.addEventListener('DOMContentLoaded', event => {
 
         let body = "";
         for (var i = 0; i < data.length; i++) {
+            let petData = data[i].pet;
+            let petName = data[i].pet?.name;
+            console.log(petData);
+            console.log(petName);
             body+=`<tr><td>${data[i].date}</td>
                 <td>${data[i].time}</td>
-                <td>${data[i].pet.name}</td>
+                <td>${petName}</td>
                 <td>
-                    <button class="btn btn-primary"ref="${data[i]._id}" onclick="goToEdit(this)" type="button">Editar</button>
-                    <button class="btn btn-danger" ref="${data[i]._id}" onclick="deleteUser(this)" type="button">Eliminar</button>
+                    <button class="btn btn-primary" ref="${data[i]._id}" onclick="goToEdit(this)" type="button">Editar</button>
+                    <button class="btn btn-danger" ref="${data[i]._id}" onclick="deleteAppointment(this)" type="button">Eliminar</button>
                 </td>
                 <tr>`;
         }
