@@ -7,7 +7,7 @@ import {authjwt} from "../middlewares" // se importan por modulos
 
 router.post("/", [authjwt.verifyToken, authjwt.isAdminOrMedic] , clinicHistoryCtrol.createClinicHistory) // requiere token o pase, se incluye verifyToken antes, para posteriormente crear
 
-router.get("/pet/:petId", clinicHistoryCtrol.getClinicHistoryByPetId)
+router.get("/pet/:petId", [authjwt.verifyToken, authjwt.isAdminOrMedic] , clinicHistoryCtrol.getClinicHistoryByPetId)
 
 router.post("/consultation", [authjwt.verifyToken, authjwt.isAdminOrMedic] , clinicHistoryCtrol.addConsultation)
 

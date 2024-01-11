@@ -1,3 +1,8 @@
+function goToInvoice(e) {
+    let pet_id = e.getAttribute('ref');
+    location.href ='../invoice/create.html?p=' + pet_id;
+}
+
 window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos, con el DOMContentLoaded cuando se cargue el contenido
     const token = document.cookie
         .split("; ")
@@ -11,7 +16,7 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
     let pet_id = params.get("p");
 
     let chId = 0
-    
+
     let url = "http://localhost:3000/api/clinicHistory/pet/" + pet_id; // se hace referencia al origen de los datos 
     fetch(url, { // se hace solicitud a la url
         headers: { // cuando no se asigna metodo, por descarte toma GET
@@ -44,7 +49,9 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
                 <td>${data.consultations[i].dx}</td>
                 <td>${data.consultations[i].forecast}</td>
                 <td>${data.consultations[i].treatment}</td>
-                <td></td>
+                <td>
+                    <button class="btn btn-info" ref="${data.pet._id}" onclick="goToInvoice(this)" type="button">Factura</button>
+                </td>
             <tr>`; // se crea la estructura html de la tabla, y se le asigan una variabel para despues mostrarla. 
         }
         document.getElementById('consultationsData').innerHTML = body;
