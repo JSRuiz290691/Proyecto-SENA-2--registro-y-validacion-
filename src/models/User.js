@@ -14,8 +14,7 @@ const userSchema = new Schema(
             unique: true
         },
         contactNumber: {
-            type: Number,
-            unique: true
+            type: String
         },
         email: {
             type: String,

@@ -12,8 +12,7 @@ export const signUp = async(req, res) => {
         id,
         contactNumber,
         email, 
-        password: await User.encryptPassword(password), //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
-        pets 
+        password: await User.encryptPassword(password) //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
     })
     //antes de guardar el usuario
     if(role) { //si existe la propiedad roles
@@ -25,7 +24,7 @@ export const signUp = async(req, res) => {
     }
     if(pets){
         const foundPets = await Pet.find({_id: {$in: pets}})
-        newUser.pets = [foundPets.map(pets => pets._id)]
+        newUser.pets = [foundPets.map(pet => pet._id)]
     }
     console.log('pets: ', pets);
     console.log('foundPets: ', foundPets);
