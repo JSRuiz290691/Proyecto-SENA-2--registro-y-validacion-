@@ -32,7 +32,7 @@ export const updateUserById = async (req, res) => {
         userData.role = foundRole.map(role => role._id) // se busca guardar un arreglo con los id de cada rol, y no los objetos, que recorra el foundRoles con el metodo map, y por cada objeto quiero que solo devuelvas el rol.id
     }
 
-    if(pets) { //si existe la propiedad roles
+    if(pets) { //si existe la propiedad pet
         userData.pets = [];
         for (let i = 0; i < pets.length; i++) {
             const pet_id = pets[i];

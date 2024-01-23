@@ -2,9 +2,10 @@ import User from "../models/User"
 import jwt from "jsonwebtoken"
 import config from "../config"
 import Role from "../models/Role";
+import Pet from "../models/Pet";
 
 export const signUp = async(req, res) => {
-    const {name, lastname, id, contactNumber, email, password, role} = req.body;
+    const {name, lastname, id, contactNumber, email, password, role, pets} = req.body;
     const newUser = new User ({
         name, 
         lastname,
@@ -12,7 +13,7 @@ export const signUp = async(req, res) => {
         contactNumber,
         email, 
         password: await User.encryptPassword(password), //cada vez que guarde un usuario, la contraseña lo que guarda es el cifrado mediante encryptPassword, se guarda la contraseña encriptada.
-        role 
+        pets 
     })
     //antes de guardar el usuario
     if(role) { //si existe la propiedad roles
@@ -21,6 +22,10 @@ export const signUp = async(req, res) => {
     }else{
         const role = await Role.findOne({name: "user"}) // si no encuentra ningun rol, se buscara el rol llamado user
         newUser.role = [role._id] // se guarda en el nuevousuario el id del rol user como arreglo por que roles es un arreglo
+    }
+    if(pets){
+        const foundPets = await Pet.find({_id: {$in: pets}})
+        newUser.pets = [foundPets.map(pets => pets._id)]
     }
 
     const savedUser = await newUser.save();
