@@ -6,6 +6,8 @@ import Pet from "../models/Pet";
 
 export const signUp = async(req, res) => {
     const {name, lastname, id, contactNumber, email, password, role, pets} = req.body;
+    console.log('contactNumber: ', contactNumber);
+    console.log('pets: ', pets);
     const newUser = new User ({
         name, 
         lastname,
@@ -23,11 +25,10 @@ export const signUp = async(req, res) => {
         newUser.role = [role._id] // se guarda en el nuevousuario el id del rol user como arreglo por que roles es un arreglo
     }
     if(pets){
-        const foundPets = await Pet.find({_id: {$in: pets}})
-        newUser.pets = [foundPets.map(pet => pet._id)]
+        const foundPets = await Pet.find({_id: {$in: pets}});
+        newUser.pets = [foundPets.map(pet => pet._id)];
+        console.log('foundPets: ', foundPets);
     }
-    console.log('pets: ', pets);
-    console.log('foundPets: ', foundPets);
 
     const savedUser = await newUser.save();
     console.log(savedUser)
