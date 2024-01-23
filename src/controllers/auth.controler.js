@@ -31,7 +31,7 @@ export const signUp = async(req, res) => {
     }
 
     const savedUser = await newUser.save();
-    console.log(savedUser)
+    console.log('user created: ', savedUser);
     
 
     const token = jwt.sign({id: savedUser._id}, config.SECRET, {  // tokens, es como crear un pase para el usuario y validad si se le da informacion o no

@@ -29,7 +29,6 @@ export const getClinicHistoryByPetId = async (req, res) => { // Se busca la cita
     } else {
         const foundPet = await Pet.findById(petId)
         const user = await User.findOne({ pets: petId})
-        console.log(user)
         if(user === null) {
             res.status(404).json({})
         } else {

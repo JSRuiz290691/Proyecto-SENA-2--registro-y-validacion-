@@ -14,6 +14,8 @@ export const getUserById = async (req, res) => {
 
 export const updateUserById = async (req, res) => {
     const {name, lastname, id, contactNumber, email, password, role, pets} = req.body;
+    console.log('number: ', contactNumber);
+    console.log('pets: ', pets);
 
     let userData = {
         name, 
@@ -41,7 +43,7 @@ export const updateUserById = async (req, res) => {
         }
     }
 
-    console.log(userData);
+    console.log('user update: ', userData);
 
     const updateUser = await User.findByIdAndUpdate(req.params.userId, userData, {
         new: true
