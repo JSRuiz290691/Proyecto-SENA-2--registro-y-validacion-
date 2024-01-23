@@ -27,10 +27,12 @@ export const signUp = async(req, res) => {
         const foundPets = await Pet.find({_id: {$in: pets}})
         newUser.pets = [foundPets.map(pets => pets._id)]
     }
+    console.log('pets: ', pets);
+    console.log('foundPets: ', foundPets);
 
     const savedUser = await newUser.save();
     console.log(savedUser)
-    console.log(savedUser.role)
+    
 
     const token = jwt.sign({id: savedUser._id}, config.SECRET, {  // tokens, es como crear un pase para el usuario y validad si se le da informacion o no
         expiresIn:86400 // 24 horas, el numero esta en segundos.
