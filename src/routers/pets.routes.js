@@ -9,6 +9,8 @@ router.post("/", petsCtrol.createPet) // requiere token o pase, se incluye verif
 
 router.get("/", [authjwt.verifyToken] , petsCtrol.getPets)
 
+router.get("/list", [authjwt.verifyToken, authjwt.isAdminOrMedic] , petsCtrol.getPets)
+
 router.get("/:petId", [authjwt.verifyToken, authjwt.isAdminOrMedic],petsCtrol.getPetById)
 
 router.put("/:petId", [authjwt.verifyToken, authjwt.isAdminOrMedic], petsCtrol.updatePetById)

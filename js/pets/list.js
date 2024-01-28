@@ -33,7 +33,7 @@ function goToClinicHistory(e) {
 
 window.addEventListener('DOMContentLoaded', event => {
 
-    let url = "http://localhost:3000/api/pets"; // se hace referencia al origen de los datos 
+    let url = "http://localhost:3000/api/pets/list"; // se hace referencia al origen de los datos 
     fetch(url, { // se hace solicitud a la url
         headers: { // cuando no se asigna metodo, por descarte toma GET
             "Access-Control-Allow-Origin": "*",
@@ -45,6 +45,7 @@ window.addEventListener('DOMContentLoaded', event => {
         console.log(response.status);
         if (response.status == 403) {
             alert('Usuario no autorizado');
+            location.href = '/index.html';
         } else {
             return response.json();
         }

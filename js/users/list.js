@@ -45,6 +45,7 @@ window.addEventListener('DOMContentLoaded', event => {
             // console.log(response.status);
             if (response.status == 403) {
                 alert('Usuario no autorizado');
+                location.href = '/index.html';
             } else {
                 return response.json();
             }

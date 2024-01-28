@@ -55,9 +55,13 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
         })
         .then((response) => response.json())
         .then((json) => {
-            alert("Cita creada exitosamente"); //envia mensaje que confirma la creacion del usuario
-            console.log(json, 'json');
-            location.href = '/index.html';
+            if (json.msg) { //si json tiene el mensaje 
+                alert(json.msg)
+            } else {
+                alert("Cita creada exitosamente"); //envia mensaje que confirma la creacion del usuario
+                console.log(json, 'json');
+                //location.href = '/index.html';
+            }
         })
         .catch(error => console.log(error, 'error'))
     }

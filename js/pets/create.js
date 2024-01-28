@@ -26,17 +26,13 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
             console.log(response.status);
             if (response.status == 403) {
                 alert('Usuario no autorizado');
+                location.href = '/index.html';
             } else {
                 return response.json();
             }
         }) // recibe la respuesta y la pasa a formato json
         .then(data => {
-            let options = ''; 
-            for (var i = 0; i < data.length; i++) {
-                options+=`<option value='${data[i]._id}'>${data[i].name}</option>`
-            }
-            petOwner_element.innerHTML = options;
-        }) // se lee el objeto data y se pasa por consola
+        }) 
         .catch(error => console.log(error)) // si existe error que lo atrape con la palabra catch
 
 

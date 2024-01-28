@@ -14,8 +14,6 @@ export const getUserById = async (req, res) => {
 
 export const updateUserById = async (req, res) => {
     const {name, lastname, id, contactNumber, email, password, role, pets} = req.body;
-    console.log('number: ', contactNumber);
-    console.log('pets: ', pets);
 
     let userData = {
         name, 
@@ -30,7 +28,7 @@ export const updateUserById = async (req, res) => {
     }
 
     if(role) { //si existe la propiedad roles
-        const foundRole = await Role.find({name: {$in: role}}) // si el usuario ingresa el nombre de un rol, se guarda en foundRoles, devuelve un objeto u objetos
+        const foundRole = await Role.find({name: {$in: role}}) // si el usuario selecciona el nombre de un rol, se guarda en foundRoles, devuelve un objeto u objetos
         userData.role = foundRole.map(role => role._id) // se busca guardar un arreglo con los id de cada rol, y no los objetos, que recorra el foundRoles con el metodo map, y por cada objeto quiero que solo devuelvas el rol.id
     }
 
