@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
     var gender_element = document.getElementById("gender");
     var years_element = document.getElementById("years");
     var birthDate_element = document.getElementById("birthDate");
-    var petOwner_element = document.getElementById("petOwner");
     var characteristicsPet_element = document.getElementById("characteristicsPet");
     var photo_element = document.getElementById("photo");
 
@@ -39,16 +38,36 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
     const btn = document.getElementById("btn_createPet"); // evento asignado con el id del boton
 
     function createPet() {  //se obtienen los datos ingresados y se guardan en las variables correspondientes
-        
+        var error_msg = '';
         var animalType = animalType_element.value; //se guarda en la variable el valor ingresado.
+        if (animalType.length == 0) {
+            error_msg += 'Debe ingresar un Tipo de Animal -';
+        }
         var name = name_element.value;
+        if (name.length == 0) {
+            error_msg += 'Debe ingresar Nombre de Animal -';
+        }
         var gender = gender_element.value;
+        if (gender.length == 0) {
+            error_msg += 'Debe ingresar el Genero del Animal -';
+        }
         var years = years_element.value;
+        if (years.length == 0) {
+            error_msg += 'Debe ingresar la edad de la mascota -';
+        }
         var birthDate = birthDate_element.value;
+        if (birthDate.length == 0) {
+            error_msg += 'Debe ingresar la fecha de nacimiento de la mascota -';
+        }
         var characteristicsPet = characteristicsPet_element.value;
+        if (characteristicsPet.length == 0) {
+            error_msg += 'Debe ingresar las caracteristicas de la mascota -';
+        }
         var photo = photo_element.value;
-
-        fetch("http://localhost:3000/api/pets", { //mediante la funcion fetch y el metodo POST
+        if (error_msg.length != 0) {
+            alert(error_msg);
+        }else{
+            fetch("http://localhost:3000/api/pets", { //mediante la funcion fetch y el metodo POST
             method: "POST",
             body: JSON.stringify({
                 animalType: animalType,
@@ -72,6 +91,7 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
             location.href = '/index.html';
         })
         .catch(error => console.log(error, 'error'))
+        }
     }
 
     btn.addEventListener("click", (e) => {

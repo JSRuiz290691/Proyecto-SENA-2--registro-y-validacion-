@@ -9,7 +9,7 @@ export const createAppointment = async (req, res) => { // ene sta funcion princi
     if (appointments.length > 0) {
         res.status(200).json({msg: 'Debe seleccionar otra fecha y hora'})
     } else {
-        const newAppointment = new Appointment({date, time, pet});  // se crea un nuevo Pet objeto
+        const newAppointment = new Appointment({date, time, pet});  // se crea un nuevo CITA objeto
         const appointmentSave = await newAppointment.save() //para guardarlo se ejecuta su metodo save, pero antes se le incluye el await por que se va a guardar en la DB y esto toma tiempo
         res.status(200).json(appointmentSave) //para especificar codigo de estado ".status()", que son los que le dicen al navegadoas que exactamente paso, el codigo 201 especifica que un nuevo recurso se ha creado  
     }

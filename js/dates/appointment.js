@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', event => { // escuchador de eventos,
             } else {
                 alert("Cita creada exitosamente"); //envia mensaje que confirma la creacion del usuario
                 console.log(json, 'json');
-                //location.href = '/index.html';
+                location.href = '/index.html';
             }
         })
         .catch(error => console.log(error, 'error'))
